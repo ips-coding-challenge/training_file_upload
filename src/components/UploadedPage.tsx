@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import check from '../assets/check.svg'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 import 'react-lazy-load-image-component/src/effects/blur.css'
+import { motion } from 'framer-motion'
+import { fadeInSlide } from '../animations/fadeIn'
 
 interface UploadedPageProps {
   uploadedImg: string[]
@@ -15,7 +17,13 @@ const UploadedPage = ({ uploadedImg }: UploadedPageProps) => {
     setCopied(url)
   }
   return (
-    <div className="flex flex-col items-center justify-center w-full">
+    <motion.div
+      variants={fadeInSlide}
+      initial="hidden"
+      animate="visible"
+      transition={{ duration: 0.5 }}
+      className="flex flex-col items-center justify-center w-full"
+    >
       <img src={check} alt="check icon" />
       <h1 className="text-2xl text-gray2 mb-4">Uploaded successfully!</h1>
       {uploadedImg.length > 0 &&
@@ -49,8 +57,8 @@ const UploadedPage = ({ uploadedImg }: UploadedPageProps) => {
             </div>
           </div>
         ))}
-    </div>
+    </motion.div>
   )
 }
 
-export default UploadedPage
+export default React.memo(UploadedPage)

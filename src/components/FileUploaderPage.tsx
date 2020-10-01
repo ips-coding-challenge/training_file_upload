@@ -1,6 +1,8 @@
 import React, { useRef, useState } from 'react'
 import uploadImage from '../assets/image.svg'
 import mime from 'mime-types'
+import { motion } from 'framer-motion'
+import { fadeInSlide } from '../animations/fadeIn'
 
 interface FileUploaderProps {
   sendFiles: (files: FileList) => void
@@ -63,8 +65,8 @@ const FileUploaderPage = ({ sendFiles }: FileUploaderProps) => {
       }
 
       if (lookup && format.includes(lookup)) {
-        if (Math.round(file.size / 1024 / 1024) > 3) {
-          hasErrors.push('Your image is too big, it should be less thant 3mb')
+        if (Math.round(file.size / 1024 / 1024) > 5) {
+          hasErrors.push('Your image is too big, it should be less thant 5mb')
         }
       }
     }
@@ -83,7 +85,12 @@ const FileUploaderPage = ({ sendFiles }: FileUploaderProps) => {
   }
 
   return (
-    <>
+    <motion.div
+      variants={fadeInSlide}
+      initial="hidden"
+      animate="visible"
+      transition={{ duration: 0.3 }}
+    >
       <h1 className="text-2xl text-gray2 mb-4">Upload your images</h1>
       <h3 className="text-sm text-gray3 mb-4">
         Files should be jpg, jpeg or png
@@ -128,7 +135,7 @@ const FileUploaderPage = ({ sendFiles }: FileUploaderProps) => {
           />
         </label>
       </div>
-    </>
+    </motion.div>
   )
 }
 
