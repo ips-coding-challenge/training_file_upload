@@ -19,8 +19,11 @@ const UploadedPage = ({ uploadedImg }: UploadedPageProps) => {
       <img src={check} alt="check icon" />
       <h1 className="text-2xl text-gray2 mb-4">Uploaded successfully!</h1>
       {uploadedImg.length > 0 &&
-        uploadedImg.map((url) => (
-          <div className="flex flex-col md:flex-row my-2 w-full items-center">
+        uploadedImg.map((url, index) => (
+          <div
+            key={index}
+            className="flex flex-col md:flex-row my-2 w-full items-center"
+          >
             <LazyLoadImage
               style={{ minWidth: '150px' }}
               className=" w-full object-cover md:w-24 rounded-card h-32 md:mr-10"
@@ -28,11 +31,11 @@ const UploadedPage = ({ uploadedImg }: UploadedPageProps) => {
               effect="blur"
               src={url}
             />
-            {/* <img className="rounded-card" src={url} alt="uploaded" /> */}
             <div className="flex h-12 rounded-lg w-full border border-gray4 px-2 my-4 bg-gray5">
               <input
                 className="flex-auto truncate ... text-xs text-gray2 bg-transparent mr-2"
                 type="text"
+                onChange={() => {}}
                 value={url}
               />
               <button

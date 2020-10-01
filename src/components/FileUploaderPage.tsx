@@ -29,11 +29,16 @@ const FileUploaderPage = ({ sendFiles }: FileUploaderProps) => {
 
   const onDropFile = async (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault()
-    handleFiles(e.dataTransfer.files)
+    if (e.dataTransfer.files.length > 0) {
+      handleFiles(e.dataTransfer.files)
+    }
   }
 
   const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault()
+    if (e.target.files && e.target.files.length > 0) {
+      handleFiles(e.target.files)
+    }
   }
 
   const isValid = (files: FileList): Boolean => {
@@ -80,7 +85,9 @@ const FileUploaderPage = ({ sendFiles }: FileUploaderProps) => {
   return (
     <>
       <h1 className="text-2xl text-gray2 mb-4">Upload your images</h1>
-      <h3 className="text-sm text-gray3 mb-4">Files should be Jpeg, Png,...</h3>
+      <h3 className="text-sm text-gray3 mb-4">
+        Files should be jpg, jpeg or png
+      </h3>
       {errors.length > 0 && (
         <ul className="bg-danger w-full rounded text-white text-center text-sm py-2 mb-4">
           {errors.map((error: string) => (

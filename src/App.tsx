@@ -7,17 +7,25 @@ import UploadedPage from './components/UploadedPage'
 interface FileProgress {
   name: string
   progress: number
+  src: any
 }
 
 function App() {
   // App state to show different component (idle, upload, completed)
   const [appState, setAppState] = useState('idle')
   const [files, setFiles] = useState<FileProgress[]>([])
-  const [uploadedImg, setUploadedImg] = useState([
-    // 'https://res.cloudinary.com/trucmachin/image/upload/v1601481646/challenge/g9bktvtg9dklxriugq8a.png',
-    // 'https://res.cloudinary.com/trucmachin/image/upload/v1601481441/challenge/ezizsvwcr6vr6byhhwfc.jpg',
-    // 'https://res.cloudinary.com/trucmachin/image/upload/v1601481441/challenge/ezizsvwcr6vr6byhhwfc.jpg',
-  ])
+  const [uploadedImg, setUploadedImg] = useState([])
+
+  const extractUrl = (file: any) =>
+    new Promise((resolve, reject) => {
+      let src
+      const reader = new FileReader()
+      reader.onload = (e: any) => {
+        src = e.target.result
+        resolve(src)
+      }
+      reader.readAsDataURL(file)
+    })
 
   const sendFiles = async (files: FileList) => {
     if (
@@ -26,12 +34,18 @@ function App() {
     ) {
       throw Error('You should add the environment variables')
     }
-    let filesProgress: FileProgress[] = Array.from(files).map((file: File) => {
-      return {
+
+    let filesProgress: FileProgress[] = []
+
+    for (const file of Array.from(files)) {
+      const src: any = await extractUrl(file)
+      filesProgress.push({
         name: file.name,
         progress: 0,
-      }
-    })
+        src: src,
+      })
+    }
+
     setFiles(filesProgress)
     setAppState('upload')
     try {
@@ -52,7 +66,6 @@ function App() {
               'Content-Type': 'multipart/form-data',
             },
             onUploadProgress: (e: ProgressEvent<EventTarget>) => {
-              console.log('Progress event', e)
               setFiles((old) => {
                 const newOne = [...old]
                 const index = old.findIndex((f) => f.name === file.name)
