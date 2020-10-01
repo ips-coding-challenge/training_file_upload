@@ -1,6 +1,6 @@
 import React from 'react'
 import { FileProgress } from '../types/types'
-import ProgressBar from './ProgressBar'
+import ProgressBarContainer from './ProgressBarContainer'
 
 interface UploadProgressPageProps {
   files: FileProgress[]
@@ -13,7 +13,7 @@ const UploadProgressPage = ({ files }: UploadProgressPageProps) => {
       {files &&
         files?.length > 0 &&
         Array.from(files).map((file: FileProgress) => {
-          return <ProgressBar key={file.name} file={file} />
+          return <ProgressBarContainer key={file.name} file={file} />
         })}
     </>
   )
