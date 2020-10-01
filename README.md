@@ -1,6 +1,8 @@
 ## Image Uploader challenge from devchallenges.io
 
-You can check the **DEMO** here:
+You can check the **DEMO** here: https://training-file-upload.vercel.app/
+
+![GIF](https://res.cloudinary.com/trucmachin/image/upload/v1601541275/upload_file_qsobbz.gif)
 
 If you are interested, go check the challenge here:
 https://devchallenges.io/challenges/O2iGT9yBd6xZBrOcVirx
