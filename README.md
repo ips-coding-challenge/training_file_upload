@@ -9,7 +9,7 @@ https://devchallenges.io/challenges/O2iGT9yBd6xZBrOcVirx
 
 ![challenge](https://firebasestorage.googleapis.com/v0/b/devchallenges-1234.appspot.com/o/challengesDesigns%2FImageUploaderThumbnail.png?alt=media&token=f32259ea-dd8f-4146-9a89-6e3c817b3167)
 
-## I used React with Typescript + Tailwindcss to make the little project
+## I used React with Typescript + Tailwindcss to make this little project
 
 I added the possibility to upload multiple files at the same time (3 by default)
 
