@@ -1,6 +1,6 @@
 import { atom, atomFamily, selectorFamily } from 'recoil'
 
-export const filesState = atom({
+export const filesState = atom<any[]>({
   key: 'files',
   default: [],
 })
