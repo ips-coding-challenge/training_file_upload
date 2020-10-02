@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useRecoilValue } from 'recoil'
+import useSendFile from '../hooks/useSendFile'
 import { progressSelector } from '../state/state'
 
 interface ProgressBarProps {
@@ -7,6 +8,7 @@ interface ProgressBarProps {
 }
 const ProgressBar = ({ name }: ProgressBarProps) => {
   const file = useRecoilValue(progressSelector(name))
+
   return (
     <div
       style={{ width: `${file?.progress}%` }}
